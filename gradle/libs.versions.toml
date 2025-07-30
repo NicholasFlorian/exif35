@@ -13,10 +13,10 @@ composeMultiplatform = "1.8.2"
 junit = "4.13.2"
 kotlin = "2.2.0"
 
-koin = "4.0.0"
-koin-compose = "4.0.0"
-room = "2.7.0"
-sqlite = "2.4.0"
+koin = "4.1.0"
+koin-compose = "4.1.0"
+room = "2.7.2"
+sqlite = "2.5.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
