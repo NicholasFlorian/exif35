@@ -5,7 +5,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 @Immutable
@@ -317,10 +319,21 @@ fun Exif35Theme(
         else -> lightScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Exif35Typeography(),
-        content = content
-    )
+    val extendedColorScheme = when {
+        darkTheme -> extendedDark
+        else -> extendedLight
+    }
+
+    CompositionLocalProvider(LocalExtendedColorScheme provides extendedColorScheme) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Exif35Typeography(),
+            content = content
+        )
+    }
+}
+
+private val LocalExtendedColorScheme = staticCompositionLocalOf {
+    extendedLight
 }
 

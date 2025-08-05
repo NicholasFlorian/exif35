@@ -35,7 +35,5 @@ google-services.json
 *.hprof
 
 # Xcode and iOS development
-*.xcuserstate
-iosApp/iosApp.xcworkspace/
-iosApp/xcuserdata/
+iosApp/iosApp.xcodeproj/xcuserdata/
 .DS_Store

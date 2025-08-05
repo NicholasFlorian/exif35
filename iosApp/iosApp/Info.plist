@@ -4,5 +4,10 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UILaunchStoryboardName</key>
+		<string>splashScreen</string>
+	</dict>
 </dict>
 </plist>
