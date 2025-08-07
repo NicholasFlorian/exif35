@@ -18,7 +18,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CameraCard(name: String, lastUsed: String, shotsLeft: Int, film: String, lens: String) {
+fun CameraCard(
+    brand: String,
+    model: String,
+    lastUsed: String,
+    shotsTaken: Int,
+    rollSize: Int = 36,
+    film: String,
+    lens: String
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,16 +35,34 @@ fun CameraCard(name: String, lastUsed: String, shotsLeft: Int, film: String, len
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(16.dp)
     ) {
-        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
+        CompositionLocalProvider(
+            LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top
             ) {
-                Text(text = name, style = MaterialTheme.typography.titleLarge)
+                Row(
+                    verticalAlignment = Alignment.Bottom,
+                    horizontalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
+                    Text(
+                        text = brand,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(bottom = 1.dp)
+                    )
+                    Text(
+                        text = model,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.inversePrimary
+                    )
+                }
+
                 Column(horizontalAlignment = Alignment.End) {
                     Text(text = lastUsed, color = LocalContentColor.current.copy(alpha = 0.7f))
-                    Text(text = "$shotsLeft shots left")
+                    Text(text = "$shotsTaken / $rollSize")
                 }
             }
             Text(text = film)

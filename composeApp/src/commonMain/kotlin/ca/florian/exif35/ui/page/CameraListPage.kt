@@ -47,9 +47,11 @@ fun CameraListPage() {
         ) {
             items(10) {
                 CameraCard(
-                    name = "Canon AE-1",
+                    brand = "Canon",
+                    model = "FTb",
                     lastUsed = "2025-08-03",
-                    shotsLeft = 12,
+                    shotsTaken = 12,
+                    rollSize = 36,
                     film = "Kodak Portra 400",
                     lens = "50mm f/1.8"
                 )
