@@ -5,11 +5,6 @@ import ca.florian.exif35.ui.navigation.Exif35NavHost
 import ca.florian.exif35.ui.style.Exif35Theme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-sealed class Screen {
-    data object Splash : Screen()
-    data object CameraList : Screen()
-}
-
 @Composable
 @Preview
 fun App() {

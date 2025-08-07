@@ -13,6 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        actionBar?.hide()
         setContent {
             App()
         }
