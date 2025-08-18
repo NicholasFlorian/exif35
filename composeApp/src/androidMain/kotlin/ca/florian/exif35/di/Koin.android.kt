@@ -1,10 +1,11 @@
 package ca.florian.exif35.di
 
-import ca.florian.exif35.db.Exif35Database
-import androidx.room.RoomDatabase.Builder
-import ca.florian.exif35.db.getDatabaseBuilder
+import ca.florian.exif35.db.getDatabase
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 actual fun platformModule() = module {
-    single<Builder<Exif35Database>> { getDatabaseBuilder(get()) }
+    single {
+        getDatabase(androidContext())
+    }
 }

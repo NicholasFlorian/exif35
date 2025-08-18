@@ -9,16 +9,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import ca.florian.exif35.ui.component.CameraCard
 import ca.florian.exif35.ui.component.Exif35Title
+import ca.florian.exif35.viewmodel.CameraListViewModel
 import exif35.composeapp.generated.resources.Res
 import exif35.composeapp.generated.resources.film_stack
 import exif35.composeapp.generated.resources.plus
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CameraListPage() {
+
+    val cameraListViewModel = koinViewModel<CameraListViewModel>()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -45,17 +49,7 @@ fun CameraListPage() {
             contentPadding = innerPadding,
             modifier = Modifier.fillMaxSize(),
         ) {
-            items(10) {
-                CameraCard(
-                    brand = "Canon",
-                    model = "FTb",
-                    lastUsed = "2025-08-03",
-                    shotsTaken = 12,
-                    rollSize = 36,
-                    film = "Kodak Portra 400",
-                    lens = "50mm f/1.8"
-                )
-            }
         }
     }
 }
+

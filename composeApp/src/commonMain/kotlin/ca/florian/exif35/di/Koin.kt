@@ -1,23 +1,33 @@
 package ca.florian.exif35.di
 
 import ca.florian.exif35.db.Exif35Database
+import ca.florian.exif35.viewmodel.CameraListViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
-import androidx.room.RoomDatabase.Builder
-
+import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-expect fun platformModule(): Module
-
-fun initKoin() {
+fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
-        modules(commonModule, platformModule())
+        config?.invoke(this)
+        modules(appModule())
     }
 }
 
-val commonModule = module {
-    single { get<Builder<Exif35Database>>().build() }
+fun appModule() = listOf(
+    platformModule(),
+    daoModule(),
+    viewModelModule()
+)
+
+expect fun platformModule(): Module
+
+fun daoModule() = module {
     single { get<Exif35Database>().cameraDao() }
     single { get<Exif35Database>().filmRollDao() }
     single { get<Exif35Database>().shotDao() }
+}
+
+fun viewModelModule() = module {
+    single { CameraListViewModel(get()) }
 }

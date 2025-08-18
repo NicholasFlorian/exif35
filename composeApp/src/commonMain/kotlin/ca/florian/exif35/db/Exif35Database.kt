@@ -9,8 +9,15 @@ import ca.florian.exif35.db.model.FilmRollDao
 import ca.florian.exif35.db.model.Shot
 import ca.florian.exif35.db.model.ShotDao
 
-@Database(entities = [Camera::class, FilmRoll::class, Shot::class], version = 1)
-abstract class Exif35Database : RoomDatabase() {
+@Database(
+    entities = [
+        Camera::class,
+        FilmRoll::class,
+        Shot::class
+    ],
+    version = 1
+)
+abstract class Exif35Database : RoomDatabase(), DB {
     abstract fun cameraDao(): CameraDao
     abstract fun filmRollDao(): FilmRollDao
     abstract fun shotDao(): ShotDao
