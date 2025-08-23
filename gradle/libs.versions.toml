@@ -1,25 +1,26 @@
 [versions]
-agp = "8.7.3"
+agp = "8.11.1"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.1"
-androidx-core = "1.16.0"
-androidx-espresso = "3.6.1"
-androidx-lifecycle = "2.9.1"
-androidx-testExt = "1.2.1"
+androidx-core = "1.17.0"
+androidx-espresso = "3.7.0"
+androidx-lifecycle = "2.9.2"
+androidx-testExt = "1.3.0"
 composeMultiplatform = "1.8.2"
 core-splashscreen = "1.0.1"
 junit = "4.13.2"
-kotlin = "2.2.0"
+kotlin = "2.2.10"
 ksp = "2.2.10-2.0.2"
 
 koin = "4.1.0"
 koin-compose = "4.1.0"
 room = "2.7.2"
+room-common-paging = "3.3.0-rc01"
 sqlite = "2.5.2"
-navigation-compose = "2.9.0-beta03"
+navigation-compose = "2.9.0-beta05"
 
 
 [libraries]
@@ -43,9 +44,9 @@ koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", ver
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+room-paging-common = { module = "androidx.paging:paging-common", version.ref = "room-common-paging" }
 sqlite-bundle = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 [plugins]
@@ -55,5 +56,5 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 
-room = { id = "androidx.room", version.ref = "room" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }

@@ -1,18 +1,15 @@
 package ca.florian.exif35.db
 
 import androidx.room.Room
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
+import androidx.room.RoomDatabase
 import platform.Foundation.NSSearchPathForDirectoriesInDomains
 
-fun getDatabase(): Exif35Database {
+fun getDatabaseBuilder(): RoomDatabase.Builder<Exif35Database> {
+    val name = "${getRootDirectory()}//exif_35.db"
+
     return Room.databaseBuilder<Exif35Database>(
-        name = "${getRootDirectory()}//exif_35.db.db",
-        factory = {Exif35Database::class.instantiateImpl() }
-    ).setDriver(BundledSQLiteDriver())
-        .setQueryCoroutineContext(Dispatchers.IO)
-        .build()
+        name = name
+    )
 }
 
 private fun getRootDirectory(): String {

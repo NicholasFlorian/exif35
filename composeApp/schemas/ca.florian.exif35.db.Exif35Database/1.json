@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "24a4626bcc635cacba9259db761c8fc7",
+    "identityHash": "a661a6b241302054816e037c8cfea2d8",
     "entities": [
       {
         "tableName": "cameras",
@@ -75,6 +75,17 @@
             "id"
           ]
         },
+        "indices": [
+          {
+            "name": "index_film_rolls_cameraId",
+            "unique": false,
+            "columnNames": [
+              "cameraId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_film_rolls_cameraId` ON `${TABLE_NAME}` (`cameraId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "cameras",
@@ -150,6 +161,17 @@
             "id"
           ]
         },
+        "indices": [
+          {
+            "name": "index_shots_filmRollId",
+            "unique": false,
+            "columnNames": [
+              "filmRollId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shots_filmRollId` ON `${TABLE_NAME}` (`filmRollId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "film_rolls",
@@ -167,7 +189,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '24a4626bcc635cacba9259db761c8fc7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a661a6b241302054816e037c8cfea2d8')"
     ]
   }
 }

@@ -18,10 +18,6 @@ kotlin {
         }
     }
 
-    sourceSets.commonMain {
-        kotlin.srcDir("build/generated/ksp/commonMain/kotlin")
-    }
-
     listOf(
         iosX64(),
         iosArm64(),
@@ -32,6 +28,10 @@ kotlin {
             isStatic = true
         }
     }
+
+    sourceSets.all {
+        languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+    }
     
     sourceSets {
         androidMain.dependencies {
@@ -40,7 +40,7 @@ kotlin {
             implementation(libs.core.splashscreen)
 
             implementation(libs.koin.android)
-            implementation(libs.room.runtime.android)
+            implementation(libs.room.paging)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -58,6 +58,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
 
             implementation(libs.room.runtime)
+            implementation(libs.room.paging.common)
             implementation(libs.sqlite.bundle)
         }
         commonTest.dependencies {
@@ -91,7 +92,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
+    dependencies {
+        implementation(libs.room.paging)
+    }
 }
 
 room {
@@ -100,8 +103,6 @@ room {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-    implementation(libs.koin.core)
-    implementation(libs.koin.test)
 
     add("kspAndroid", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
