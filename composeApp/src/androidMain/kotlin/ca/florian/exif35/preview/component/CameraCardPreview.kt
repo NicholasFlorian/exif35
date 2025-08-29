@@ -19,3 +19,14 @@ fun CameraCardPreview() {
         )
     }
 }
+
+@PreviewLightDark
+@Composable
+fun NewCameraCardPreview() {
+    Exif35Theme {
+        CameraCard(
+            brand = "Canon",
+            model = "AE-1",
+        )
+    }
+}

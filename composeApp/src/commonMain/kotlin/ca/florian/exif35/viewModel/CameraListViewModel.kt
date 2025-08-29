@@ -12,19 +12,19 @@ class CameraListViewModel(
     private val cameraDao: CameraDao
 ) : ViewModel() {
 
-    val cameraListState = cameraDao.getAll().stateIn(
+    val cameras = cameraDao.getAll().stateIn(
         viewModelScope,
         started = Lazily,
         initialValue = emptyList()
     )
 
-    fun addDestination(camera: Camera) {
+    fun addCamera(camera: Camera) {
         viewModelScope.launch {
             cameraDao.insert(camera)
         }
     }
 
-    fun deleteDestination(camera: Camera) {
+    fun deleteCamera(camera: Camera) {
         viewModelScope.launch {
             cameraDao.delete(camera)
         }
