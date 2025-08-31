@@ -15,6 +15,7 @@ captures/
 *.aab
 *.apk
 output-metadata.json
+.kotlin/
 
 # IntelliJ
 *.iml
@@ -32,3 +33,7 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Xcode and iOS development
+iosApp/iosApp.xcodeproj/xcuserdata/
+.DS_Store

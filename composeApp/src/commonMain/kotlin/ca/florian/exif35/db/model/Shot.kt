@@ -2,10 +2,12 @@ package ca.florian.exif35.db.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "shots",
+    indices = [Index(value = ["filmRollId"])],
     foreignKeys = [
         ForeignKey(
             entity = FilmRoll::class,
