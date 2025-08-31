@@ -66,10 +66,9 @@ fun CameraListPage(
             items(cameras.value.size) { index ->
                 val camera = cameras.value[index]
                 CameraCard(
-                    onClickListener = { /* TODO */ },
-                    onLongClickListener = { camera -> cameraListViewModel.deleteCamera(camera) },
-                    brand = camera.brand,
-                    model = camera.model
+                    onNavigateToCamera = { /* TODO */ },
+                    onDeleteCamera = { camera -> cameraListViewModel.deleteCamera(camera) },
+                    camera = camera,
                 )
             }
         }
