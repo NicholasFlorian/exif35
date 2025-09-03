@@ -20,7 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import ca.florian.exif35.db.model.Camera
+import ca.florian.exif35.db.model.camera.Camera
 
 @Composable
 fun CameraDialog(

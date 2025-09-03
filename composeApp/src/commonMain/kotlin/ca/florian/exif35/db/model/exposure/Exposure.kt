@@ -1,26 +1,27 @@
-package ca.florian.exif35.db.model
+package ca.florian.exif35.db.model.exposure
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import ca.florian.exif35.db.model.roll.Roll
 
 @Entity(
-    tableName = "shots",
-    indices = [Index(value = ["filmRollId"])],
+    tableName = "exposures",
+    indices = [Index(value = ["exposureId"])],
     foreignKeys = [
         ForeignKey(
-            entity = FilmRoll::class,
+            entity = Roll::class,
             parentColumns = ["id"],
-            childColumns = ["filmRollId"],
-            onDelete = ForeignKey.CASCADE
+            childColumns = ["rollId"],
+            onDelete = ForeignKey.Companion.CASCADE
         )
     ]
 )
-data class Shot(
+data class Exposure(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val filmRollId: Long,
+    val rollId: Long,
     val location: String,
     val latitude: Double,
     val longitude: Double,

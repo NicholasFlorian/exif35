@@ -5,12 +5,9 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -22,20 +19,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
-import ca.florian.exif35.db.model.Camera
+import ca.florian.exif35.db.model.camera.Camera
+import ca.florian.exif35.db.model.camera.CameraGlance
 
 @Composable
 fun CameraCard(
-    onNavigateToCamera: ((Camera) -> Unit) = {},
-    onDeleteCamera: ((Camera) -> Unit) = {},
-    camera: Camera,
-    lastUsed: String = "****-**-**",
-    shotsTaken: Int = 0,
-    rollSize: Int = 0,
-    film: String = "*",
-    lens: String = "*",
+    onNavigateToCamera: (Long) -> Unit = {},
+    onDeleteCamera: (Camera) -> Unit = {},
+    cameraGlance: CameraGlance
 ) {
-    Box (
+    val camera = cameraGlance.camera
+    val lastRollUsed = cameraGlance.lastRollUsed.?roll
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
@@ -43,7 +39,7 @@ fun CameraCard(
                 vertical = 8.dp
             )
             .combinedClickable(
-                onClick =  { onNavigateToCamera(camera) },
+                onClick = { onNavigateToCamera(camera.id) },
                 onLongClick = { onDeleteCamera(camera) }
             )
     ) {
@@ -73,20 +69,20 @@ fun CameraCard(
                         Text(
                             maxLines = 1,
                             color = LocalContentColor.current.copy(alpha = 0.7f),
-                            text = lastUsed,
+                            text = "*",
                         )
-                        Text(text = "$shotsTaken / $rollSize")
+                        Text(text = "${cameraInformation.shotsTaken} / ${cameraInformation.negative?.numberOfShots ?: 0}")
                     }
                 }
                 Text(
                     maxLines = 1,
                     overflow = Ellipsis,
-                    text = lens,
+                    text = cameraInformation.lastLensUsed ?: "*",
                 )
                 Text(
                     maxLines = 1,
                     overflow = Ellipsis,
-                    text = film,
+                    text = cameraInformation.negative?.name ?: "*",
                 )
             }
         }

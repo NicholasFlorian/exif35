@@ -1,4 +1,4 @@
-package ca.florian.exif35.db.model
+package ca.florian.exif35.db.model.camera
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

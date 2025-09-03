@@ -2,21 +2,21 @@ package ca.florian.exif35.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ca.florian.exif35.db.model.Camera
-import ca.florian.exif35.db.model.CameraDao
+import ca.florian.exif35.db.model.GlanceDao
+import ca.florian.exif35.db.model.camera.Camera
+import ca.florian.exif35.db.model.camera.CameraDao
 import kotlinx.coroutines.flow.SharingStarted.Companion.Lazily
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class CameraListViewModel(
-    private val cameraDao: CameraDao
+class HomePageViewModel(
+    private val cameraDao: CameraDao,
+    private val glanceDao: GlanceDao,
 ) : ViewModel() {
 
-    val cameras = cameraDao.getAll().stateIn(
+    val cameraGlances = glanceDao.getAllCameraGlances().stateIn(
         viewModelScope,
-        started = Lazily,
-        initialValue = emptyList()
-    )
+        Lazily, emptyList())
 
     fun addCamera(camera: Camera) {
         viewModelScope.launch {

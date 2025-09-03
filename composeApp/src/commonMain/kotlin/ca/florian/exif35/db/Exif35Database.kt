@@ -5,28 +5,28 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import ca.florian.exif35.db.model.Camera
-import ca.florian.exif35.db.model.CameraDao
-import ca.florian.exif35.db.model.FilmRoll
-import ca.florian.exif35.db.model.FilmRollDao
-import ca.florian.exif35.db.model.Shot
-import ca.florian.exif35.db.model.ShotDao
+import ca.florian.exif35.db.model.camera.Camera
+import ca.florian.exif35.db.model.roll.Roll
+import ca.florian.exif35.db.model.exposure.Exposure
+import ca.florian.exif35.db.model.exposure.ExposureDao
+import ca.florian.exif35.db.model.roll.RollDao
+import ca.florian.exif35.db.model.camera.CameraDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
 @Database(
     entities = [
         Camera::class,
-        FilmRoll::class,
-        Shot::class
+        Roll::class,
+        Exposure::class
     ],
     version = 1
 )
 @ConstructedBy(Exif35DatabaseConstructor::class)
 abstract class Exif35Database : RoomDatabase(), DB {
     abstract fun cameraDao(): CameraDao
-    abstract fun filmRollDao(): FilmRollDao
-    abstract fun shotDao(): ShotDao
+    abstract fun filmRollDao(): RollDao
+    abstract fun shotDao(): ExposureDao
     override fun clearAllTables(): Unit {}
 }
 

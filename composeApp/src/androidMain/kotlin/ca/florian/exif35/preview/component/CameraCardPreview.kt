@@ -2,7 +2,7 @@ package ca.florian.exif35.preview.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import ca.florian.exif35.db.model.Camera
+import ca.florian.exif35.db.model.camera.Camera
 import ca.florian.exif35.ui.component.CameraCard
 import ca.florian.exif35.ui.style.Exif35Theme
 

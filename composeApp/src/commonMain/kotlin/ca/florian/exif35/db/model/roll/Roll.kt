@@ -1,12 +1,13 @@
-package ca.florian.exif35.db.model
+package ca.florian.exif35.db.model.roll
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import ca.florian.exif35.db.model.camera.Camera
 
 @Entity(
-    tableName = "film_rolls",
+    tableName = "rolls",
     indices = [Index(value = ["cameraId"])],
     foreignKeys = [
         ForeignKey(
@@ -17,11 +18,13 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class FilmRoll(
+data class Roll(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val cameraId: Long,
+    val inUse: Boolean,
     val name: String,
     val iso: Int,
-    val numberOfShots: Int
+    val exposures: Int,
+    val exposuresTaken: Int,
 )
