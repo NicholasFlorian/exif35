@@ -7,14 +7,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
-import ca.florian.exif35.db.model.camera.Camera
 import ca.florian.exif35.ui.component.CameraTitle
-import ca.florian.exif35.viewmodel.HomePageViewModel
+import ca.florian.exif35.viewModel.CameraPageViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,13 +19,17 @@ import org.koin.compose.viewmodel.koinViewModel
 fun CameraPage(
     navController: NavController,
     cameraId: Long,
-    viewModel: HomePageViewModel = koinViewModel<HomePageViewModel>()
+    viewModel: CameraPageViewModel = koinViewModel<CameraPageViewModel>()
 ) {
-    var camera by remember { mutableStateOf<Camera?>(null) }
 
-    LaunchedEffect(cameraId) {
-        camera = viewModel.getCameraById(cameraId)
-    }
+    LaunchedEffect(
+        key1 = cameraId,
+        block = {
+            viewModel.setCameraId(cameraId)
+        }
+    )
+
+    val camera by viewModel.cameraState.collectAsState(null)
 
     Scaffold(
         topBar = {

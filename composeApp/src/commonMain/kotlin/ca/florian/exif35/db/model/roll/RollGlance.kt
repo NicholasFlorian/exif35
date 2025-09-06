@@ -10,8 +10,7 @@ data class RollGlance(
     @Relation(
         entity = Exposure::class,
         parentColumn = "id",
-        entityColumn = "filmRollId",
+        entityColumn = "rollId",
     )
-    @Embedded
     val recentExposures: List<Exposure>?
 )

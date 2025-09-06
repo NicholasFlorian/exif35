@@ -21,16 +21,15 @@ import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
 import ca.florian.exif35.db.model.camera.Camera
 import ca.florian.exif35.db.model.camera.CameraGlance
+import ca.florian.exif35.db.model.roll.Roll
 
 @Composable
 fun CameraCard(
-    onNavigateToCamera: (Long) -> Unit = {},
-    onDeleteCamera: (Camera) -> Unit = {},
-    cameraGlance: CameraGlance
+    onNavigateToCamera: () -> Unit = {},
+    onDeleteCamera: () -> Unit = {},
+    camera: Camera,
+    roll: Roll? = null
 ) {
-    val camera = cameraGlance.camera
-    val lastRollUsed = cameraGlance.lastRollUsed.?roll
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,8 +38,8 @@ fun CameraCard(
                 vertical = 8.dp
             )
             .combinedClickable(
-                onClick = { onNavigateToCamera(camera.id) },
-                onLongClick = { onDeleteCamera(camera) }
+                onClick = { onNavigateToCamera() },
+                onLongClick = { onDeleteCamera() }
             )
     ) {
         Column(
@@ -71,18 +70,18 @@ fun CameraCard(
                             color = LocalContentColor.current.copy(alpha = 0.7f),
                             text = "*",
                         )
-                        Text(text = "${cameraInformation.shotsTaken} / ${cameraInformation.negative?.numberOfShots ?: 0}")
+                        Text(text = "${roll?.exposuresTaken ?: 0} / ${roll?.exposures ?: 0}")
                     }
                 }
                 Text(
                     maxLines = 1,
                     overflow = Ellipsis,
-                    text = cameraInformation.lastLensUsed ?: "*",
+                    text = "*",
                 )
                 Text(
                     maxLines = 1,
                     overflow = Ellipsis,
-                    text = cameraInformation.negative?.name ?: "*",
+                    text = roll?.name ?: "*",
                 )
             }
         }

@@ -73,7 +73,8 @@ fun CameraDialog(
                 onValueChange = { brand = it },
                 label = { Text("Camera Brand") },
                 isError = isErrorBrand,
-                maxLines = 1
+                maxLines = 1,
+                singleLine = true,
             )
             OutlinedTextField(
                 modifier = Modifier
@@ -85,6 +86,7 @@ fun CameraDialog(
                 label = { Text("Camera Model") },
                 isError = isErrorModel,
                 maxLines = 1,
+                singleLine = true,
             )
             Button(
                 onClick = onConfirmationClicked,

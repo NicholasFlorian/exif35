@@ -7,9 +7,10 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExposureDao {
+
     @Insert
     suspend fun insert(exposure: Exposure)
 
     @Query("SELECT * FROM exposures WHERE rollId = :rollId")
-    suspend fun getAllForRoll(rollId: Long): Flow<List<Exposure>>
+    fun getAllForRoll(rollId: Long): Flow<List<Exposure>>
 }

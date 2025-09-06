@@ -25,8 +25,8 @@ import kotlinx.coroutines.IO
 @ConstructedBy(Exif35DatabaseConstructor::class)
 abstract class Exif35Database : RoomDatabase(), DB {
     abstract fun cameraDao(): CameraDao
-    abstract fun filmRollDao(): RollDao
-    abstract fun shotDao(): ExposureDao
+    abstract fun rollDao(): RollDao
+    abstract fun exposureDao(): ExposureDao
     override fun clearAllTables(): Unit {}
 }
 

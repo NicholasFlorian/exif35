@@ -21,8 +21,8 @@ import ca.florian.exif35.db.model.camera.Camera
 data class Roll(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val cameraId: Long,
-    val inUse: Boolean,
+    val cameraId: Long = 0,
+    val inUse: Boolean = false,
     val name: String,
     val iso: Int,
     val exposures: Int,

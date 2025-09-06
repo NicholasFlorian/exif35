@@ -2,6 +2,7 @@ package ca.florian.exif35.di
 
 import ca.florian.exif35.db.Exif35Database
 import ca.florian.exif35.db.getExif35Database
+import ca.florian.exif35.viewModel.CameraPageViewModel
 import ca.florian.exif35.viewmodel.HomePageViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -21,10 +22,11 @@ fun initKoin(config: KoinAppDeclaration? = null) {
 fun appModule() = module {
     single { getExif35Database(get()) }
     single { get<Exif35Database>().cameraDao() }
-    single { get<Exif35Database>().filmRollDao() }
-    single { get<Exif35Database>().shotDao() }
+    single { get<Exif35Database>().rollDao() }
+    single { get<Exif35Database>().exposureDao() }
 
     single { HomePageViewModel(get()) }
+    single { CameraPageViewModel(get()) }
 }
 
 expect fun platformModule(): Module

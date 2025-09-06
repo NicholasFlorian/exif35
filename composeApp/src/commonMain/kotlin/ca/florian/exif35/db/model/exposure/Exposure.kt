@@ -8,7 +8,7 @@ import ca.florian.exif35.db.model.roll.Roll
 
 @Entity(
     tableName = "exposures",
-    indices = [Index(value = ["exposureId"])],
+    indices = [Index(value = ["rollId"])],
     foreignKeys = [
         ForeignKey(
             entity = Roll::class,

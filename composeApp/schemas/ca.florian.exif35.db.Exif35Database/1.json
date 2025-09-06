@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a661a6b241302054816e037c8cfea2d8",
+    "identityHash": "54ef48f4c538ea5871936e54a08b6967",
     "entities": [
       {
         "tableName": "cameras",
@@ -35,8 +35,8 @@
         }
       },
       {
-        "tableName": "film_rolls",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `cameraId` INTEGER NOT NULL, `name` TEXT NOT NULL, `iso` INTEGER NOT NULL, `numberOfShots` INTEGER NOT NULL, FOREIGN KEY(`cameraId`) REFERENCES `cameras`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "tableName": "rolls",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `cameraId` INTEGER NOT NULL, `inUse` INTEGER NOT NULL, `name` TEXT NOT NULL, `iso` INTEGER NOT NULL, `exposures` INTEGER NOT NULL, `exposuresTaken` INTEGER NOT NULL, FOREIGN KEY(`cameraId`) REFERENCES `cameras`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -47,6 +47,12 @@
           {
             "fieldPath": "cameraId",
             "columnName": "cameraId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "inUse",
+            "columnName": "inUse",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -63,8 +69,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "numberOfShots",
-            "columnName": "numberOfShots",
+            "fieldPath": "exposures",
+            "columnName": "exposures",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exposuresTaken",
+            "columnName": "exposuresTaken",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -77,13 +89,13 @@
         },
         "indices": [
           {
-            "name": "index_film_rolls_cameraId",
+            "name": "index_rolls_cameraId",
             "unique": false,
             "columnNames": [
               "cameraId"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_film_rolls_cameraId` ON `${TABLE_NAME}` (`cameraId`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_rolls_cameraId` ON `${TABLE_NAME}` (`cameraId`)"
           }
         ],
         "foreignKeys": [
@@ -101,8 +113,8 @@
         ]
       },
       {
-        "tableName": "shots",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `filmRollId` INTEGER NOT NULL, `location` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `title` TEXT, `aperture` TEXT, `lensSettings` TEXT, `exposureSetting` TEXT, FOREIGN KEY(`filmRollId`) REFERENCES `film_rolls`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "tableName": "exposures",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rollId` INTEGER NOT NULL, `location` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `title` TEXT, `aperture` TEXT, `lensSettings` TEXT, `exposureSetting` TEXT, FOREIGN KEY(`rollId`) REFERENCES `rolls`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -111,8 +123,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "filmRollId",
-            "columnName": "filmRollId",
+            "fieldPath": "rollId",
+            "columnName": "rollId",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -163,22 +175,22 @@
         },
         "indices": [
           {
-            "name": "index_shots_filmRollId",
+            "name": "index_exposures_rollId",
             "unique": false,
             "columnNames": [
-              "filmRollId"
+              "rollId"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_shots_filmRollId` ON `${TABLE_NAME}` (`filmRollId`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exposures_rollId` ON `${TABLE_NAME}` (`rollId`)"
           }
         ],
         "foreignKeys": [
           {
-            "table": "film_rolls",
+            "table": "rolls",
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
-              "filmRollId"
+              "rollId"
             ],
             "referencedColumns": [
               "id"
@@ -189,7 +201,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a661a6b241302054816e037c8cfea2d8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '54ef48f4c538ea5871936e54a08b6967')"
     ]
   }
 }

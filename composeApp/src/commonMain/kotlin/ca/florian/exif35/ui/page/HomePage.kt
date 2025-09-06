@@ -31,7 +31,9 @@ fun HomePage(
     homePageViewModel: HomePageViewModel = koinViewModel<HomePageViewModel>()
 ) {
 
-    val cameraGlances = homePageViewModel.cameraGlances.collectAsStateWithLifecycle()
+    val cameraGlancesState = homePageViewModel
+        .cameraGlances
+        .collectAsStateWithLifecycle(emptyList())
 
     val openCameraDialog = remember { mutableStateOf(false) }
     when {
@@ -66,16 +68,18 @@ fun HomePage(
             contentPadding = innerPadding,
             modifier = Modifier.fillMaxSize(),
         ) {
-            items(cameraGlances.value.size) { index ->
-                val camera = cameraGlances.value[index]
+            items(cameraGlancesState.value.size) { index ->
+                val cameraGlance = cameraGlancesState.value[index]
+                val camera = cameraGlance.camera
                 CameraCard(
-                    onNavigateToCamera = { cameraId ->
-                        navController.navigate(route = CameraRoute(cameraId))
+                    onNavigateToCamera = {
+                        navController.navigate(route = CameraRoute(camera.id))
                     },
-                    onDeleteCamera = { camera ->
+                    onDeleteCamera = {
                         homePageViewModel.deleteCamera(camera)
                     },
-                    cameraGlance = cameraInfo,
+                    camera = camera,
+                    roll = cameraGlance.lastRollUsed
                 )
             }
         }

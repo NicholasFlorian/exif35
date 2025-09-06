@@ -3,7 +3,6 @@ package ca.florian.exif35.db.model.camera
 import androidx.room.Embedded
 import androidx.room.Relation
 import ca.florian.exif35.db.model.roll.Roll
-import ca.florian.exif35.db.model.roll.RollGlance
 
 data class CameraGlance(
     @Embedded
@@ -13,5 +12,11 @@ data class CameraGlance(
         parentColumn = "id",
         entityColumn = "cameraId"
     )
-    val lastRollUsed: RollGlance?
+    val lastRollUsed: Roll?,
+//    @Relation(
+//        entity = Exposure::class,
+//        parentColumn = "id",
+//        entityColumn = "rollId"
+//    )
+//    val exposureGlances: List<RollGlance>
 )
