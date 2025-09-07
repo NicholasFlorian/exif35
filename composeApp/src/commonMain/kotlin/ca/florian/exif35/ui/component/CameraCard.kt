@@ -20,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
 import ca.florian.exif35.db.model.camera.Camera
-import ca.florian.exif35.db.model.camera.CameraGlance
 import ca.florian.exif35.db.model.roll.Roll
 
 @Composable
@@ -68,7 +67,7 @@ fun CameraCard(
                         Text(
                             maxLines = 1,
                             color = LocalContentColor.current.copy(alpha = 0.7f),
-                            text = "*",
+                            text = roll?.dateUpdated.toString(),
                         )
                         Text(text = "${roll?.exposuresTaken ?: 0} / ${roll?.exposures ?: 0}")
                     }

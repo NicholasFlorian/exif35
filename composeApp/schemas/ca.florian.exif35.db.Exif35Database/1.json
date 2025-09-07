@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "54ef48f4c538ea5871936e54a08b6967",
+    "identityHash": "42ab245e3c219b1e08390414461a3184",
     "entities": [
       {
         "tableName": "cameras",
@@ -36,7 +36,7 @@
       },
       {
         "tableName": "rolls",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `cameraId` INTEGER NOT NULL, `inUse` INTEGER NOT NULL, `name` TEXT NOT NULL, `iso` INTEGER NOT NULL, `exposures` INTEGER NOT NULL, `exposuresTaken` INTEGER NOT NULL, FOREIGN KEY(`cameraId`) REFERENCES `cameras`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `cameraId` INTEGER NOT NULL, `isActive` INTEGER NOT NULL, `iso` INTEGER NOT NULL, `name` TEXT NOT NULL, `exposures` INTEGER NOT NULL, `exposuresTaken` INTEGER NOT NULL, `dateUpdated` INTEGER NOT NULL, FOREIGN KEY(`cameraId`) REFERENCES `cameras`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -51,8 +51,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "inUse",
-            "columnName": "inUse",
+            "fieldPath": "isActive",
+            "columnName": "isActive",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iso",
+            "columnName": "iso",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -60,12 +66,6 @@
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "iso",
-            "columnName": "iso",
-            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -77,6 +77,12 @@
           {
             "fieldPath": "exposuresTaken",
             "columnName": "exposuresTaken",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateUpdated",
+            "columnName": "dateUpdated",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -201,7 +207,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '54ef48f4c538ea5871936e54a08b6967')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '42ab245e3c219b1e08390414461a3184')"
     ]
   }
 }

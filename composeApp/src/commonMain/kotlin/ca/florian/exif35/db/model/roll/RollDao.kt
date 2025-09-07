@@ -4,20 +4,33 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RollDao {
     @Insert
-    suspend fun insert(negative: Roll)
+    suspend fun insert(roll: Roll)
+
+    @Update
+    suspend fun update(roll: Roll)
 
     @Transaction
     @Query("SELECT * FROM rolls WHERE id = :rollId")
     fun getRollGlanceById(rollId: Long) : Flow<RollGlance>
 
-    @Query("SELECT * FROM rolls WHERE id = :rollId")
-    fun getRollGlance(rollId: Long): Flow<RollGlance>
+    @Query("SELECT * FROM rolls WHERE cameraId = :cameraId ORDER BY dateUpdated DESC")
+    fun getRollsForCamera(cameraId: Long): Flow<List<Roll>>
 
-    @Query("SELECT * FROM rolls WHERE cameraId = :cameraId AND inUse = TRUE LIMIT 1")
-    suspend fun getInUseRollForCamera(cameraId: Long): Roll?
+    @Query("""
+        UPDATE rolls 
+            SET isActive = FALSE 
+            WHERE cameraId = :cameraId AND isActive = TRUE
+    """)
+    suspend fun setAllRollsInactiveForCamera(cameraId: Long)
+
+    suspend fun insertAndSetActive(roll: Roll) {
+        setAllRollsInactiveForCamera(roll.cameraId)
+        insert(roll)
+    }
 }
