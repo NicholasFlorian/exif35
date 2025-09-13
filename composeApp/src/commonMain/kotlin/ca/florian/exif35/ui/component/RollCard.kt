@@ -18,7 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import ca.florian.exif35.db.model.roll.RollGlance
-import ca.florian.exif35.ui.util.DateFormatter
+import ca.florian.exif35.ui.elements.ConditionalDate
+import ca.florian.exif35.ui.elements.ConditionalTitle
 
 @Composable
 fun RollCard(
@@ -36,6 +37,8 @@ fun RollCard(
     } else {
         MaterialTheme.colorScheme.onTertiaryContainer
     }
+
+    val date = rollGlance.recentExposures?.lastOrNull()?.dateCreated ?: roll.dateCreated
 
     Box(
         modifier = Modifier
@@ -60,8 +63,8 @@ fun RollCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.Top
                 ) {
-                    Text(text = roll.name)
-                    Text(text = DateFormatter.format(rollGlance.recentExposures?.lastOrNull()?.dateCreated))
+                    ConditionalTitle(roll.name)
+                    ConditionalDate(date)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),

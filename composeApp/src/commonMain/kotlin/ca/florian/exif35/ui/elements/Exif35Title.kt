@@ -1,8 +1,7 @@
-package ca.florian.exif35.ui.component
+package ca.florian.exif35.ui.elements
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import exif35.composeapp.generated.resources.Res

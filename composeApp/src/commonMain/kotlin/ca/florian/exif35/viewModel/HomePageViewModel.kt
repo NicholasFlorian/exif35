@@ -1,4 +1,4 @@
-package ca.florian.exif35.viewmodel
+package ca.florian.exif35.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

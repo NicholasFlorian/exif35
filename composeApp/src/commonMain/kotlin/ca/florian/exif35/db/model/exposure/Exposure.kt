@@ -29,6 +29,7 @@ data class Exposure(
     val title: String? = null,
     val aperture: String? = null,
     val lensSettings: String? = null,
+    val iso: String? = null,
     val exposureSetting: String? = null,
     val dateCreated: Long = Clock.System.now().toEpochMilliseconds()
 )

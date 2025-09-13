@@ -18,7 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import ca.florian.exif35.ui.component.CameraTitle
+import ca.florian.exif35.ui.elements.CameraTitle
 import ca.florian.exif35.ui.component.RollCard
 import ca.florian.exif35.ui.component.RollDialog
 import ca.florian.exif35.viewModel.CameraPageViewModel

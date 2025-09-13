@@ -24,6 +24,7 @@ data class Roll (
     val id: Long = 0,
     val cameraId: Long = 0,
     val isActive: Boolean = false,
+    val dateCreated: Long = Clock.System.now().toEpochMilliseconds(),
     val iso: Int,
     val name: String,
     val exposures: Int,

@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
 import ca.florian.exif35.db.model.camera.Camera
 import ca.florian.exif35.db.model.roll.Roll
+import ca.florian.exif35.ui.elements.CameraTitle
 
 @Composable
 fun CameraCard(
@@ -49,7 +50,7 @@ fun CameraCard(
                 .padding(16.dp)
         ) {
             CompositionLocalProvider(
-                LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant
+                LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -64,6 +65,7 @@ fun CameraCard(
                         modifier = Modifier.padding(start = 8.dp),
                         horizontalAlignment = Alignment.End
                     ) {
+                        //TODO date
                         Text(text = "${roll?.exposuresTaken ?: 0} / ${roll?.exposures ?: 0}")
                     }
                 }
