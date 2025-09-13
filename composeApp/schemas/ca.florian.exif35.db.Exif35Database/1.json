@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4b7b307a4b8f954fb87218ad70942ed4",
+    "identityHash": "bb7c56cdcbc959b944464a698f61a150",
     "entities": [
       {
         "tableName": "cameras",
@@ -120,7 +120,7 @@
       },
       {
         "tableName": "exposures",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rollId` INTEGER NOT NULL, `location` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `title` TEXT, `aperture` TEXT, `lensSettings` TEXT, `iso` TEXT, `exposureSetting` TEXT, `dateCreated` INTEGER NOT NULL, FOREIGN KEY(`rollId`) REFERENCES `rolls`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rollId` INTEGER NOT NULL, `location` TEXT, `latitude` REAL, `longitude` REAL, `title` TEXT, `aperture` TEXT, `lensSettings` TEXT, `iso` TEXT, `exposureSetting` TEXT, `dateCreated` INTEGER NOT NULL, FOREIGN KEY(`rollId`) REFERENCES `rolls`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -137,20 +137,17 @@
           {
             "fieldPath": "location",
             "columnName": "location",
-            "affinity": "TEXT",
-            "notNull": true
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "latitude",
             "columnName": "latitude",
-            "affinity": "REAL",
-            "notNull": true
+            "affinity": "REAL"
           },
           {
             "fieldPath": "longitude",
             "columnName": "longitude",
-            "affinity": "REAL",
-            "notNull": true
+            "affinity": "REAL"
           },
           {
             "fieldPath": "title",
@@ -218,7 +215,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b7b307a4b8f954fb87218ad70942ed4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bb7c56cdcbc959b944464a698f61a150')"
     ]
   }
 }

@@ -23,9 +23,9 @@ data class Exposure(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val rollId: Long,
-    val location: String,
-    val latitude: Double,
-    val longitude: Double,
+    val location: String?,
+    val latitude: Double?,
+    val longitude: Double?,
     val title: String? = null,
     val aperture: String? = null,
     val lensSettings: String? = null,

@@ -63,7 +63,7 @@ fun RollCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.Top
                 ) {
-                    ConditionalTitle(roll.name)
+                    ConditionalTitle(roll.name, modifier = Modifier.weight(1f, fill = false))
                     ConditionalDate(date)
                 }
                 Row(

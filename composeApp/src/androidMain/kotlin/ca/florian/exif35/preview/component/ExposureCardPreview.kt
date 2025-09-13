@@ -15,9 +15,13 @@ fun ExposureCardPreview() {
             exposure = Exposure(
                 rollId = 1L,
                 location = "Test Location",
-                latitude = 0.0,
-                longitude = 0.0,
-                title = "An exposure",
+                latitude = 45.5017,
+                longitude = -73.5673,
+                title = "An exposure with all details",
+                aperture = "f/8",
+                lensSettings = "50mm",
+                iso = "400",
+                exposureSetting = "1/125s",
                 dateCreated = Date().time
             )
         )
@@ -32,9 +36,13 @@ fun ExposureCardNullTitlePreview() {
             exposure = Exposure(
                 rollId = 1L,
                 location = "Test Location",
-                latitude = 0.0,
-                longitude = 0.0,
+                latitude = 45.5017,
+                longitude = -73.5673,
                 title = null,
+                aperture = "f/8",
+                lensSettings = "50mm",
+                iso = "400",
+                exposureSetting = "1/125s",
                 dateCreated = Date().time
             )
         )
@@ -49,9 +57,34 @@ fun ExposureCardLongTitlePreview() {
             exposure = Exposure(
                 rollId = 1L,
                 location = "Test Location",
+                latitude = 45.5017,
+                longitude = -73.5673,
+                title = "This is a very long exposure title to test overflow and truncation",
+                aperture = "f/8",
+                lensSettings = "50mm",
+                iso = "400",
+                exposureSetting = "1/125s",
+                dateCreated = Date().time
+            )
+        )
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun ExposureCardNoLocationOrDetailsPreview() {
+    Exif35Theme {
+        ExposureCard(
+            exposure = Exposure(
+                rollId = 1L,
+                location = "",
                 latitude = 0.0,
                 longitude = 0.0,
-                title = "This is a very long exposure title to test overflow",
+                title = "Exposure with no location or details",
+                aperture = null,
+                lensSettings = null,
+                iso = null,
+                exposureSetting = null,
                 dateCreated = Date().time
             )
         )
