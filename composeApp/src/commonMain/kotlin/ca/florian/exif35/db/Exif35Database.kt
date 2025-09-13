@@ -5,28 +5,28 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import ca.florian.exif35.db.model.Camera
-import ca.florian.exif35.db.model.CameraDao
-import ca.florian.exif35.db.model.FilmRoll
-import ca.florian.exif35.db.model.FilmRollDao
-import ca.florian.exif35.db.model.Shot
-import ca.florian.exif35.db.model.ShotDao
+import ca.florian.exif35.db.model.camera.Camera
+import ca.florian.exif35.db.model.roll.Roll
+import ca.florian.exif35.db.model.exposure.Exposure
+import ca.florian.exif35.db.model.exposure.ExposureDao
+import ca.florian.exif35.db.model.roll.RollDao
+import ca.florian.exif35.db.model.camera.CameraDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
 @Database(
     entities = [
         Camera::class,
-        FilmRoll::class,
-        Shot::class
+        Roll::class,
+        Exposure::class
     ],
     version = 1
 )
 @ConstructedBy(Exif35DatabaseConstructor::class)
 abstract class Exif35Database : RoomDatabase(), DB {
     abstract fun cameraDao(): CameraDao
-    abstract fun filmRollDao(): FilmRollDao
-    abstract fun shotDao(): ShotDao
+    abstract fun rollDao(): RollDao
+    abstract fun exposureDao(): ExposureDao
     override fun clearAllTables(): Unit {}
 }
 
@@ -40,12 +40,12 @@ expect object Exif35DatabaseConstructor : RoomDatabaseConstructor<Exif35Database
     override fun initialize(): Exif35Database
 }
 
-//TODO handle database migrations
 fun getExif35Database(
     builder: RoomDatabase.Builder<Exif35Database>
 ): Exif35Database {
     return builder
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
+        .fallbackToDestructiveMigration(true) // TODO debug vs release
         .build()
 }

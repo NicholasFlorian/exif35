@@ -5,12 +5,9 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -22,20 +19,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
-import ca.florian.exif35.db.model.Camera
+import ca.florian.exif35.db.model.camera.Camera
+import ca.florian.exif35.db.model.roll.Roll
 
 @Composable
 fun CameraCard(
-    onNavigateToCamera: ((Camera) -> Unit) = {},
-    onDeleteCamera: ((Camera) -> Unit) = {},
+    onNavigateToCamera: () -> Unit = {},
+    onDeleteCamera: () -> Unit = {},
     camera: Camera,
-    lastUsed: String = "****-**-**",
-    shotsTaken: Int = 0,
-    rollSize: Int = 0,
-    film: String = "*",
-    lens: String = "*",
+    roll: Roll? = null
 ) {
-    Box (
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
@@ -43,8 +37,8 @@ fun CameraCard(
                 vertical = 8.dp
             )
             .combinedClickable(
-                onClick =  { onNavigateToCamera(camera) },
-                onLongClick = { onDeleteCamera(camera) }
+                onClick = { onNavigateToCamera() },
+                onLongClick = { onDeleteCamera() }
             )
     ) {
         Column(
@@ -70,23 +64,18 @@ fun CameraCard(
                         modifier = Modifier.padding(start = 8.dp),
                         horizontalAlignment = Alignment.End
                     ) {
-                        Text(
-                            maxLines = 1,
-                            color = LocalContentColor.current.copy(alpha = 0.7f),
-                            text = lastUsed,
-                        )
-                        Text(text = "$shotsTaken / $rollSize")
+                        Text(text = "${roll?.exposuresTaken ?: 0} / ${roll?.exposures ?: 0}")
                     }
                 }
                 Text(
                     maxLines = 1,
                     overflow = Ellipsis,
-                    text = lens,
+                    text = "*",
                 )
                 Text(
                     maxLines = 1,
                     overflow = Ellipsis,
-                    text = film,
+                    text = roll?.name ?: "*",
                 )
             }
         }
