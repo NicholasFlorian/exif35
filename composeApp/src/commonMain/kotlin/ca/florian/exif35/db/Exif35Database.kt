@@ -40,12 +40,12 @@ expect object Exif35DatabaseConstructor : RoomDatabaseConstructor<Exif35Database
     override fun initialize(): Exif35Database
 }
 
-//TODO handle database migrations
 fun getExif35Database(
     builder: RoomDatabase.Builder<Exif35Database>
 ): Exif35Database {
     return builder
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
+        .fallbackToDestructiveMigration(true) // TODO debug vs release
         .build()
 }
