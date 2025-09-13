@@ -17,12 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import ca.florian.exif35.db.model.roll.Roll
+import ca.florian.exif35.db.model.roll.RollGlance
+import ca.florian.exif35.ui.util.DateFormatter
 
 @Composable
 fun RollCard(
-    roll: Roll,
+    rollGlance: RollGlance,
 ) {
+    val roll = rollGlance.roll
     val backgroundColor = if (roll.isActive) {
         MaterialTheme.colorScheme.secondaryContainer
     } else {
@@ -59,7 +61,7 @@ fun RollCard(
                     verticalAlignment = Alignment.Top
                 ) {
                     Text(text = roll.name)
-                    Text(text = roll.dateUpdated.toString()) // TODO: Format date
+                    Text(text = DateFormatter.format(rollGlance.recentExposures?.lastOrNull()?.dateCreated))
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),

@@ -12,6 +12,7 @@ import ca.florian.exif35.db.model.exposure.ExposureDao
 import ca.florian.exif35.db.model.roll.RollDao
 import ca.florian.exif35.db.model.camera.CameraDao
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 
 @Database(
     entities = [

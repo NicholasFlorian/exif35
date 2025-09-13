@@ -19,8 +19,12 @@ interface RollDao {
     @Query("SELECT * FROM rolls WHERE id = :rollId")
     fun getRollGlanceById(rollId: Long) : Flow<RollGlance>
 
-    @Query("SELECT * FROM rolls WHERE cameraId = :cameraId ORDER BY dateUpdated DESC")
+    @Query("SELECT * FROM rolls WHERE cameraId = :cameraId ORDER BY id DESC")
     fun getRollsForCamera(cameraId: Long): Flow<List<Roll>>
+
+    @Transaction
+    @Query("SELECT * FROM rolls WHERE cameraId = :cameraId ORDER BY id DESC")
+    fun getRollGlancesForCamera(cameraId: Long): Flow<List<RollGlance>>
 
     @Query("""
         UPDATE rolls 

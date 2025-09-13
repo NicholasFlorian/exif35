@@ -64,11 +64,6 @@ fun CameraCard(
                         modifier = Modifier.padding(start = 8.dp),
                         horizontalAlignment = Alignment.End
                     ) {
-                        Text(
-                            maxLines = 1,
-                            color = LocalContentColor.current.copy(alpha = 0.7f),
-                            text = roll?.dateUpdated.toString(),
-                        )
                         Text(text = "${roll?.exposuresTaken ?: 0} / ${roll?.exposures ?: 0}")
                     }
                 }

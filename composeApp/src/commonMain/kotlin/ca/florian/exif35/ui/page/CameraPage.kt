@@ -84,8 +84,8 @@ fun CameraPage(
             modifier = Modifier.fillMaxSize(),
             contentPadding = paddingValues
         ) {
-            items(rolls) { roll ->
-                RollCard(roll = roll)
+            items(rolls) { rollGlance ->
+                RollCard(rollGlance = rollGlance)
             }
         }
     }

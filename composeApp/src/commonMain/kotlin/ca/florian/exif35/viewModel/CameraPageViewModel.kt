@@ -6,6 +6,7 @@ import ca.florian.exif35.db.model.camera.Camera
 import ca.florian.exif35.db.model.camera.CameraDao
 import ca.florian.exif35.db.model.roll.Roll
 import ca.florian.exif35.db.model.roll.RollDao
+import ca.florian.exif35.db.model.roll.RollGlance
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,11 +29,11 @@ class CameraPageViewModel(
         }
     }
 
-    val rollsState: Flow<List<Roll>> = _cameraId.flatMapLatest { id ->
+    val rollsState: Flow<List<RollGlance>> = _cameraId.flatMapLatest { id ->
         if (id == null) {
             MutableStateFlow(emptyList())
         } else {
-            rollDao.getRollsForCamera(id)
+            rollDao.getRollGlancesForCamera(id)
         }
     }
 

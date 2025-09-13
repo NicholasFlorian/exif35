@@ -27,6 +27,5 @@ data class Roll (
     val iso: Int,
     val name: String,
     val exposures: Int,
-    val exposuresTaken: Int,
-    val dateUpdated: Long = Clock.System.now().toEpochMilliseconds()
+    val exposuresTaken: Int
 )
