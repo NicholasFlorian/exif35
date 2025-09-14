@@ -56,7 +56,7 @@ fun ConditionalDateNullPreview() {
 @Composable
 fun ConditionalTitlePreview() {
     Exif35Theme {
-        ConditionalTitle("A Title")
+        ConditionalTitle(title = "A Title")
     }
 }
 
@@ -64,7 +64,7 @@ fun ConditionalTitlePreview() {
 @Composable
 fun ConditionalTitleNullPreview() {
     Exif35Theme {
-        ConditionalTitle(null)
+        ConditionalTitle(title = null)
     }
 }
 

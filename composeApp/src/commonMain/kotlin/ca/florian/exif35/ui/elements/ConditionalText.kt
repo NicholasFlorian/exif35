@@ -9,14 +9,15 @@ import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
 fun ConditionalText(
-    text: String?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    text: String? = null,
+    type: String = "text"
 ) {
     val (displayText, color) =
         if (text.isNullOrEmpty())
-            Pair("<text>", LocalContentColor.current.copy(alpha = 0.8f))
+            Pair("$type: ***", LocalContentColor.current.copy(alpha = 0.8f))
         else
-            Pair(text, LocalContentColor.current)
+            Pair("$type: $text", LocalContentColor.current)
 
     Text(
         modifier = modifier,

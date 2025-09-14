@@ -2,7 +2,7 @@ package ca.florian.exif35.ui.util
 
 import kotlin.math.roundToInt
 
-fun Float.roundToDecimals(decimals: Int): Float {
+fun Double.roundToDecimals(decimals: Int): Float {
     var dotAt = 1
     repeat(decimals) { dotAt *= 10 }
     val roundedValue = (this * dotAt).roundToInt()

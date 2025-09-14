@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import ca.florian.exif35.ui.util.roundToDecimals
 
 @Composable
 fun ConditionalLocation(
@@ -16,8 +17,12 @@ fun ConditionalLocation(
 ) {
     Row(modifier = modifier) {
         if (latitude != null && longitude != null) {
+
+            val latitudeString = latitude.roundToDecimals(2)
+            val longitudeString = longitude.roundToDecimals(2)
+
             Text(
-                text = "$latitude.rount $longitude", //TODO Format
+                text = "$latitudeString $longitudeString",
                 color = LocalContentColor.current,
                 fontFamily = MaterialTheme.typography.bodySmall.fontFamily,
                 maxLines = 1,

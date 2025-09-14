@@ -44,20 +44,46 @@ fun ExposureCard(
             CompositionLocalProvider(
                 LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Top
-                ) {
-                    ConditionalTitle(exposure.title, modifier = Modifier.weight(1f, fill = false))
-                    ConditionalDate(exposure.dateCreated)
-                }
-                ConditionalLocation(exposure.latitude, exposure.longitude)
-                ConditionalText(exposure.aperture)
-                ConditionalText(exposure.lensSettings)
-                ConditionalText(exposure.iso)
-                ConditionalText(exposure.exposureSetting)
+                Title(exposure)
+                Body(exposure)
             }
         }
+    }
+}
+
+@Composable
+fun Title(exposure: Exposure) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top
+    ) {
+        ConditionalTitle(
+            modifier = Modifier.weight(1f, fill = false),
+            title = exposure.title
+        )
+        ConditionalDate(exposure.dateCreated)
+    }
+}
+
+@Composable
+fun Body(exposure: Exposure) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, 4.dp)
+    ) {
+        ConditionalLocation(
+            exposure.latitude,
+            exposure.longitude
+        )
+        ConditionalText(
+            text = exposure.aperture,
+            type = "aperture"
+        )
+        ConditionalText(
+            text = exposure.iso,
+            type = "iso"
+        )
     }
 }

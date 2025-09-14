@@ -9,18 +9,20 @@ import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
 fun ConditionalTitle(
-    title: String?,
     modifier: Modifier = Modifier,
+    color: androidx.compose.ui.graphics.Color = LocalContentColor.current,
+    title: String? = null,
 ) {
     val (text, color) =
         if (title.isNullOrEmpty())
-            Pair("<title>", LocalContentColor.current.copy(alpha = 0.8f))
+            Pair("<title>", color.copy(alpha = 0.8f))
         else
-            Pair(title, LocalContentColor.current)
+            Pair(title, color)
 
     Text(
         modifier = modifier,
         fontFamily = MaterialTheme.typography.titleMedium.fontFamily,
+        fontSize = MaterialTheme.typography.titleMedium.fontSize,
         text = text,
         color = color,
         maxLines = 1,
