@@ -26,7 +26,7 @@ fun appModule() = module {
     single { get<Exif35Database>().exposureDao() }
 
     single { HomePageViewModel(get()) }
-    factory { CameraPageViewModel(get(), get()) }
+    factory { CameraPageViewModel(get(), get(), get()) }
 }
 
 expect fun platformModule(): Module

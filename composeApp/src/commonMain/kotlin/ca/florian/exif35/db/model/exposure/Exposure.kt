@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import ca.florian.exif35.db.model.roll.Roll
+import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @Entity(
@@ -19,11 +20,13 @@ import kotlin.time.ExperimentalTime
         )
     ]
 )
-data class Exposure @OptIn(ExperimentalTime::class) constructor(
+
+@OptIn(ExperimentalTime::class)
+data class Exposure constructor(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val rollId: Long,
-    val dateCreated: Long = kotlin.time.Clock.System.now().toEpochMilliseconds(),
+    val dateCreated: Long = Clock.System.now().toEpochMilliseconds(),
     val location: String?,
     val latitude: Double?,
     val longitude: Double?,
