@@ -5,7 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import ca.florian.exif35.db.model.camera.Camera
-import kotlinx.datetime.Clock
+import kotlin.time.ExperimentalTime
 
 @Entity(
     tableName = "rolls",
@@ -19,11 +19,12 @@ import kotlinx.datetime.Clock
         )
     ]
 )
-data class Roll (
+data class Roll @OptIn(ExperimentalTime::class) constructor(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val cameraId: Long = 0,
     val isActive: Boolean = false,
+    val dateCreated: Long = kotlin.time.Clock.System.now().toEpochMilliseconds(),
     val iso: Int,
     val name: String,
     val exposures: Int,

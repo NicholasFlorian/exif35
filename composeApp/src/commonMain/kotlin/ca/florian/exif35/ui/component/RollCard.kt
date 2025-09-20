@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,16 +18,21 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import ca.florian.exif35.db.model.roll.Roll
 import ca.florian.exif35.db.model.roll.RollGlance
-import ca.florian.exif35.ui.util.DateFormatter
+import ca.florian.exif35.ui.elements.ConditionalDate
+import ca.florian.exif35.ui.elements.ConditionalText
+import ca.florian.exif35.ui.elements.ConditionalTitle
 
 @Composable
 fun RollCard(
     rollGlance: RollGlance,
 ) {
     val roll = rollGlance.roll
-    val backgroundColor = if (roll.isActive) {
+
+    val color = if (roll.isActive) {
         MaterialTheme.colorScheme.secondaryContainer
     } else {
         MaterialTheme.colorScheme.tertiaryContainer
@@ -37,6 +44,8 @@ fun RollCard(
         MaterialTheme.colorScheme.onTertiaryContainer
     }
 
+    val date = rollGlance.recentExposures?.firstOrNull()?.dateCreated ?: roll.dateCreated
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,32 +54,94 @@ fun RollCard(
                 vertical = 8.dp
             )
     ) {
-        CompositionLocalProvider(
-            LocalContentColor provides onColor
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(4.dp))
+                .background(color)
+                .padding(16.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(4.dp))
-                    .background(backgroundColor)
-                    .padding(16.dp)
+            CompositionLocalProvider(
+                LocalContentColor provides onColor,
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Top
-                ) {
-                    Text(text = roll.name)
-                    Text(text = DateFormatter.format(rollGlance.recentExposures?.lastOrNull()?.dateCreated))
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.Bottom
-                ) {
-                    Text(text = "${roll.exposuresTaken} / ${roll.exposures}")
-                }
+                Header(roll, date)
+                Body(roll)
+                Footer(onColor, color)
             }
+        }
+    }
+}
+
+@Composable
+private fun Header(
+    roll: Roll,
+    date: Long,
+) {
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top
+    ) {
+        ConditionalTitle(
+            modifier = Modifier.weight(1f, fill = false),
+            color = MaterialTheme.colorScheme.onSecondary,
+            title = roll.name,
+        )
+        Column(
+            modifier = Modifier.padding(start = 8.dp),
+            horizontalAlignment = Alignment.End
+        ) {
+            ConditionalDate(date)
+            Text(text = "${roll.exposuresTaken} / ${roll.exposures}")
+        }
+    }
+}
+
+@Composable
+private fun Body(
+    roll: Roll
+) {
+    Column(
+        modifier = Modifier.padding(start = 8.dp),
+        horizontalAlignment = Alignment.Start
+    ) {
+        ConditionalText (
+            text = roll.iso.toString(),
+            type = "iso"
+        )
+    }
+}
+
+@Composable
+private fun Footer(
+    buttonBackgroundColor: Color,
+    buttonContentColor: Color
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top,
+    ) {
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = buttonBackgroundColor,
+                contentColor = buttonContentColor
+            )
+        ) {
+            Text("Expand")
+        }
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = buttonBackgroundColor,
+                contentColor = buttonContentColor
+            )
+        ) {
+            Text("Edit")
         }
     }
 }

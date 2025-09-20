@@ -2,7 +2,6 @@ package ca.florian.exif35.ui.page
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,8 +17,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import ca.florian.exif35.ui.component.CameraTitle
-import ca.florian.exif35.ui.component.RollCard
+import ca.florian.exif35.ui.elements.CameraTitle
+import ca.florian.exif35.ui.component.rollInfo
 import ca.florian.exif35.ui.component.RollDialog
 import ca.florian.exif35.viewModel.CameraPageViewModel
 import exif35.composeapp.generated.resources.Res
@@ -84,8 +83,13 @@ fun CameraPage(
             modifier = Modifier.fillMaxSize(),
             contentPadding = paddingValues
         ) {
-            items(rolls) { rollGlance ->
-                RollCard(rollGlance = rollGlance)
+            rolls.forEach { rollGlance ->
+                rollInfo(
+                    rollGlance = rollGlance,
+                    onSaveExposureClick = { title ->
+                        viewModel.addExposure(rollGlance.roll.id, title)
+                    }
+                )
             }
         }
     }

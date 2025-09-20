@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.florian.exif35.db.model.camera.Camera
 import ca.florian.exif35.db.model.camera.CameraDao
+import ca.florian.exif35.db.model.exposure.Exposure
+import ca.florian.exif35.db.model.exposure.ExposureDao
 import ca.florian.exif35.db.model.roll.Roll
 import ca.florian.exif35.db.model.roll.RollDao
 import ca.florian.exif35.db.model.roll.RollGlance
@@ -12,11 +14,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CameraPageViewModel(
     private val cameraDao: CameraDao,
-    private val rollDao: RollDao
+    private val rollDao: RollDao,
+    private val exposureDao: ExposureDao
 ) : ViewModel() {
 
     private val _cameraId = MutableStateFlow<Long?>(null)
@@ -45,6 +49,20 @@ class CameraPageViewModel(
         _cameraId.value?.let {
             rollDao.insertAndSetActive(roll.copy(cameraId = it, isActive = true))
         }
+    }
+
+    fun addExposure(rollId: Long, title: String) = viewModelScope.launch {
+        exposureDao.insert(Exposure(
+            rollId = rollId,
+            title = title,
+            location = null,
+            latitude = null,
+            longitude = null,
+            aperture = null,
+            lensSettings = null,
+            iso = null,
+            exposureSetting = null
+        ))
     }
 
     fun setActiveRoll(roll: Roll) = viewModelScope.launch {

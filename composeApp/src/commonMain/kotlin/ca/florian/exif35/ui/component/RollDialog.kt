@@ -28,12 +28,15 @@ import androidx.compose.foundation.text.KeyboardOptions
 fun RollDialog(
     onDismissRequest: () -> Unit,
     onConfirmation: (Roll) -> Unit,
+    initialName: String = "",
+    initialIso: String = "",
+    initialExposures: String = ""
 ) {
-    var name by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(initialName) }
     var isErrorName by remember { mutableStateOf(false) }
-    var iso by remember { mutableStateOf("") }
+    var iso by remember { mutableStateOf(initialIso) }
     var isErrorIso by remember { mutableStateOf(false) }
-    var exposures by remember { mutableStateOf("") }
+    var exposures by remember { mutableStateOf(initialExposures) }
     var isErrorExposures by remember { mutableStateOf(false) }
 
     val onConfirmationClicked = onClick@{

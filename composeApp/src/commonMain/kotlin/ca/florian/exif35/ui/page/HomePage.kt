@@ -16,9 +16,9 @@ import androidx.navigation.NavController
 import ca.florian.exif35.db.model.camera.Camera
 import ca.florian.exif35.ui.component.CameraCard
 import ca.florian.exif35.ui.component.CameraDialog
-import ca.florian.exif35.ui.component.Exif35Title
+import ca.florian.exif35.ui.elements.Exif35Title
 import ca.florian.exif35.ui.navigation.CameraRoute
-import ca.florian.exif35.viewmodel.HomePageViewModel
+import ca.florian.exif35.viewModel.HomePageViewModel
 import exif35.composeapp.generated.resources.Res
 import exif35.composeapp.generated.resources.plus
 import org.jetbrains.compose.resources.painterResource

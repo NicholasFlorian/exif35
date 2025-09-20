@@ -37,6 +37,32 @@ fun RollCardPreview() {
 
 @PreviewLightDark
 @Composable
+fun RollCardPreviewReallyLongText() {
+    Exif35Theme {
+        RollCard(
+            rollGlance = RollGlance(
+                roll = Roll(
+                    name = "Kodak Portra 400,000,000,000,000,000",
+                    iso = 400,
+                    exposures = 36,
+                    exposuresTaken = 12,
+                    isActive = true
+                ),
+                recentExposures = listOf(
+                    Exposure(
+                        rollId = 0,
+                        location = "",
+                        latitude = 0.0,
+                        longitude = 0.0
+                    )
+                )
+            )
+        )
+    }
+}
+
+@PreviewLightDark
+@Composable
 fun InactiveRollCardPreview() {
     Exif35Theme {
         RollCard(

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8fa75ec3f167cc3da10f3204a183e16b",
+    "identityHash": "bb7c56cdcbc959b944464a698f61a150",
     "entities": [
       {
         "tableName": "cameras",
@@ -36,7 +36,7 @@
       },
       {
         "tableName": "rolls",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `cameraId` INTEGER NOT NULL, `isActive` INTEGER NOT NULL, `iso` INTEGER NOT NULL, `name` TEXT NOT NULL, `exposures` INTEGER NOT NULL, `exposuresTaken` INTEGER NOT NULL, FOREIGN KEY(`cameraId`) REFERENCES `cameras`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `cameraId` INTEGER NOT NULL, `isActive` INTEGER NOT NULL, `dateCreated` INTEGER NOT NULL, `iso` INTEGER NOT NULL, `name` TEXT NOT NULL, `exposures` INTEGER NOT NULL, `exposuresTaken` INTEGER NOT NULL, FOREIGN KEY(`cameraId`) REFERENCES `cameras`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -53,6 +53,12 @@
           {
             "fieldPath": "isActive",
             "columnName": "isActive",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "dateCreated",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -114,7 +120,7 @@
       },
       {
         "tableName": "exposures",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rollId` INTEGER NOT NULL, `location` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `title` TEXT, `aperture` TEXT, `lensSettings` TEXT, `exposureSetting` TEXT, `dateCreated` INTEGER NOT NULL, FOREIGN KEY(`rollId`) REFERENCES `rolls`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rollId` INTEGER NOT NULL, `location` TEXT, `latitude` REAL, `longitude` REAL, `title` TEXT, `aperture` TEXT, `lensSettings` TEXT, `iso` TEXT, `exposureSetting` TEXT, `dateCreated` INTEGER NOT NULL, FOREIGN KEY(`rollId`) REFERENCES `rolls`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -131,20 +137,17 @@
           {
             "fieldPath": "location",
             "columnName": "location",
-            "affinity": "TEXT",
-            "notNull": true
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "latitude",
             "columnName": "latitude",
-            "affinity": "REAL",
-            "notNull": true
+            "affinity": "REAL"
           },
           {
             "fieldPath": "longitude",
             "columnName": "longitude",
-            "affinity": "REAL",
-            "notNull": true
+            "affinity": "REAL"
           },
           {
             "fieldPath": "title",
@@ -159,6 +162,11 @@
           {
             "fieldPath": "lensSettings",
             "columnName": "lensSettings",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "iso",
+            "columnName": "iso",
             "affinity": "TEXT"
           },
           {
@@ -207,7 +215,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8fa75ec3f167cc3da10f3204a183e16b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bb7c56cdcbc959b944464a698f61a150')"
     ]
   }
 }

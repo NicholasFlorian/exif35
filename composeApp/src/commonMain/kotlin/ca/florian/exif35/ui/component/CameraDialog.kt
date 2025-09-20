@@ -26,10 +26,12 @@ import ca.florian.exif35.db.model.camera.Camera
 fun CameraDialog(
     onDismissRequest: () -> Unit,
     onConfirmation: (Camera) -> Unit,
+    initialBrand: String = "",
+    initialModel: String = ""
 ) {
-    var model by remember { mutableStateOf("") }
+    var model by remember { mutableStateOf(initialModel) }
     var isErrorModel by remember { mutableStateOf(false) }
-    var brand by remember { mutableStateOf("") }
+    var brand by remember { mutableStateOf(initialBrand) }
     var isErrorBrand by remember { mutableStateOf(false) }
 
     val onConfirmationClicked = onClick@{

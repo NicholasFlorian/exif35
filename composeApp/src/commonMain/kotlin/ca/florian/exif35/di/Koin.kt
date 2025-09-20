@@ -3,7 +3,7 @@ package ca.florian.exif35.di
 import ca.florian.exif35.db.Exif35Database
 import ca.florian.exif35.db.getExif35Database
 import ca.florian.exif35.viewModel.CameraPageViewModel
-import ca.florian.exif35.viewmodel.HomePageViewModel
+import ca.florian.exif35.viewModel.HomePageViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -26,7 +26,7 @@ fun appModule() = module {
     single { get<Exif35Database>().exposureDao() }
 
     single { HomePageViewModel(get()) }
-    factory { CameraPageViewModel(get(), get()) }
+    factory { CameraPageViewModel(get(), get(), get()) }
 }
 
 expect fun platformModule(): Module
