@@ -69,6 +69,13 @@ fun CameraCard(
                         Text(text = "${roll?.exposuresTaken ?: 0} / ${roll?.exposures ?: 0}")
                     }
                 }
+                if (camera.owner.isNotBlank()) {
+                    Text(
+                        maxLines = 1,
+                        overflow = Ellipsis,
+                        text = camera.owner,
+                    )
+                }
                 Text(
                     maxLines = 1,
                     overflow = Ellipsis,

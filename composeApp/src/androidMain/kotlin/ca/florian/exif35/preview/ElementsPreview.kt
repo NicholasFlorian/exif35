@@ -17,7 +17,8 @@ fun CameraTitlePreview() {
         CameraTitle(
             camera = Camera(
                 brand = "Nikon",
-                model = "F3"
+                model = "F3",
+                owner = "Nick"
             )
         )
     }
@@ -30,7 +31,8 @@ fun CameraTitleLongPreview() {
         CameraTitle(
             camera = Camera(
                 brand = "ThisIsAVeryLongBrandName",
-                model = "This Is A Very Long Model Name"
+                model = "This Is A Very Long Model Name",
+                owner = "Nick"
             )
         )
     }

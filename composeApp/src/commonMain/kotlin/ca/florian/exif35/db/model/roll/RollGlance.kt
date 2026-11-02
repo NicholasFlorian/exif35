@@ -12,5 +12,7 @@ data class RollGlance(
         parentColumn = "id",
         entityColumn = "rollId",
     )
-    val recentExposures: List<Exposure>?
-)
+    val recentExposures: List<Exposure>?,
+) {
+    fun getId() = roll.id
+}

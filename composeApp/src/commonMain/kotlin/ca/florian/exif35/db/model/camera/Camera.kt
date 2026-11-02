@@ -8,5 +8,6 @@ data class Camera(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val model: String,
-    val brand: String
+    val brand: String,
+    val owner: String
 )

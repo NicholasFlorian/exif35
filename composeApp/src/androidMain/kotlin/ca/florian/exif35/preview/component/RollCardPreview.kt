@@ -22,15 +22,10 @@ fun RollCardPreview() {
                     exposuresTaken = 12,
                     isActive = true
                 ),
-                recentExposures = listOf(
-                    Exposure(
-                        rollId = 0,
-                        location = "",
-                        latitude = 0.0,
-                        longitude = 0.0
-                    )
-                )
-            )
+                recentExposures = emptyList()
+            ),
+            isExpanded = false,
+            onToggleExpanded = {}
         )
     }
 }
@@ -48,15 +43,10 @@ fun RollCardPreviewReallyLongText() {
                     exposuresTaken = 12,
                     isActive = true
                 ),
-                recentExposures = listOf(
-                    Exposure(
-                        rollId = 0,
-                        location = "",
-                        latitude = 0.0,
-                        longitude = 0.0
-                    )
-                )
-            )
+                recentExposures = emptyList()
+            ),
+            isExpanded = false,
+            onToggleExpanded = {}
         )
     }
 }
@@ -75,7 +65,9 @@ fun InactiveRollCardPreview() {
                     isActive = false
                 ),
                 recentExposures = emptyList()
-            )
+            ),
+            isExpanded = false,
+            onToggleExpanded = {}
         )
     }
 }

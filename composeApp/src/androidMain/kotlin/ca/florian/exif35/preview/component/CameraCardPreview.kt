@@ -14,7 +14,8 @@ fun CameraCardPreview() {
         CameraCard(
             camera = Camera(
                 brand = "Nikon",
-                model = "F3"
+                model = "F3",
+                owner = "John Doe"
             ),
             roll = Roll(
                 name = "Kodak Portra 400",
@@ -34,6 +35,7 @@ fun NewCameraCardPreview() {
             camera = Camera(
                 brand = "Canon",
                 model = "AE-1",
+                owner = "Jane Doe"
             ),
         )
     }
@@ -47,9 +49,30 @@ fun OverFlowCameraCardPreview() {
             camera = Camera(
                 brand = "CanonAndOnAndOnAndOnAndOn",
                 model = "AE-1-2-3-4-5-7",
+                owner = "This is a very long owner name to test overflow"
             ),
             roll = Roll(
                 name = "Kodak Portra 400,000,000,000,000,000,000,000,000,000,000,000,000",
+                iso = 400,
+                exposures = 36,
+                exposuresTaken = 12
+            )
+        )
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun CameraCardNoOwnerPreview() {
+    Exif35Theme {
+        CameraCard(
+            camera = Camera(
+                brand = "Nikon",
+                model = "F3",
+                owner = ""
+            ),
+            roll = Roll(
+                name = "Kodak Portra 400",
                 iso = 400,
                 exposures = 36,
                 exposuresTaken = 12

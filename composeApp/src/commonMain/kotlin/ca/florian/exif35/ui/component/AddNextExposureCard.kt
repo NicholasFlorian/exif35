@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun NextExposureCard(
+fun AddNextExposureCard(
     onSaveClick: (String) -> Unit
 ) {
     var title by remember { mutableStateOf("") }
@@ -42,8 +42,11 @@ fun NextExposureCard(
                 onValueChange = { title = it },
                 label = { Text("Title") }
             )
-            Button(onClick = { onSaveClick(title) }, modifier = Modifier.padding(start = 8.dp)) {
-                Text("Save")
+            Button(
+                onClick = { onSaveClick(title) },
+                modifier = Modifier.padding(start = 8.dp))
+            {
+                Text("Quick Add")
             }
         }
     }

@@ -27,12 +27,14 @@ fun CameraDialog(
     onDismissRequest: () -> Unit,
     onConfirmation: (Camera) -> Unit,
     initialBrand: String = "",
-    initialModel: String = ""
+    initialModel: String = "",
+    initialOwner: String = ""
 ) {
     var model by remember { mutableStateOf(initialModel) }
     var isErrorModel by remember { mutableStateOf(false) }
     var brand by remember { mutableStateOf(initialBrand) }
     var isErrorBrand by remember { mutableStateOf(false) }
+    var owner by remember { mutableStateOf(initialOwner) }
 
     val onConfirmationClicked = onClick@{
         isErrorModel = model.isBlank()
@@ -41,7 +43,7 @@ fun CameraDialog(
             return@onClick
         }
 
-        val camera = Camera(model = model, brand = brand)
+        val camera = Camera(model = model, brand = brand, owner = owner)
         onConfirmation(camera)
     }
 
@@ -83,10 +85,9 @@ fun CameraDialog(
                     .fillMaxWidth()
                     .padding(bottom = 8.dp),
                 colors = outlineTextColors,
-                value = model,
-                onValueChange = { model = it },
-                label = { Text("Camera Model") },
-                isError = isErrorModel,
+                value = owner,
+                onValueChange = { owner = it },
+                label = { Text("Owner (Optional)") },
                 maxLines = 1,
                 singleLine = true,
             )
@@ -97,5 +98,4 @@ fun CameraDialog(
             }
         }
     }
-
 }

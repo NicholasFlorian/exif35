@@ -29,22 +29,23 @@ import ca.florian.exif35.ui.elements.ConditionalTitle
 @Composable
 fun RollCard(
     rollGlance: RollGlance,
+    isExpanded: Boolean,
+    onToggleExpanded: () -> Unit
 ) {
     val roll = rollGlance.roll
+    val date = rollGlance.recentExposures?.firstOrNull()?.dateCreated ?: roll.dateCreated
 
-    val color = if (roll.isActive) {
+    val containerColor = if (roll.isActive) {
         MaterialTheme.colorScheme.secondaryContainer
     } else {
         MaterialTheme.colorScheme.tertiaryContainer
     }
 
-    val onColor = if (roll.isActive) {
+    val onContainerColor = if (roll.isActive) {
         MaterialTheme.colorScheme.onSecondaryContainer
     } else {
         MaterialTheme.colorScheme.onTertiaryContainer
     }
-
-    val date = rollGlance.recentExposures?.firstOrNull()?.dateCreated ?: roll.dateCreated
 
     Box(
         modifier = Modifier
@@ -58,15 +59,20 @@ fun RollCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(4.dp))
-                .background(color)
+                .background(containerColor)
                 .padding(16.dp)
         ) {
             CompositionLocalProvider(
-                LocalContentColor provides onColor,
+                LocalContentColor provides onContainerColor,
             ) {
-                Header(roll, date)
-                Body(roll)
-                Footer(onColor, color)
+                Header(roll = roll, date = date)
+                Body(roll = roll)
+                Footer(
+                    isExpanded,
+                    onToggleExpanded,
+                    containerColor,
+                    onContainerColor,
+                )
             }
         }
     }
@@ -92,8 +98,8 @@ private fun Header(
             modifier = Modifier.padding(start = 8.dp),
             horizontalAlignment = Alignment.End
         ) {
-            ConditionalDate(date)
             Text(text = "${roll.exposuresTaken} / ${roll.exposures}")
+            ConditionalDate(date)
         }
     }
 }
@@ -115,8 +121,10 @@ private fun Body(
 
 @Composable
 private fun Footer(
-    buttonBackgroundColor: Color,
-    buttonContentColor: Color
+    isExpanded: Boolean,
+    onToggleExpanded: () -> Unit,
+    containerColor: Color,
+    onContainerColor: Color
 ) {
     Row(
         modifier = Modifier
@@ -126,19 +134,19 @@ private fun Footer(
         verticalAlignment = Alignment.Top,
     ) {
         Button(
-            onClick = { },
+            onClick = onToggleExpanded,
             colors = ButtonDefaults.buttonColors(
-                containerColor = buttonBackgroundColor,
-                contentColor = buttonContentColor
+                containerColor = containerColor,
+                contentColor = onContainerColor
             )
         ) {
-            Text("Expand")
+            Text(if(isExpanded) "Collapse" else "Expand")
         }
         Button(
             onClick = { },
             colors = ButtonDefaults.buttonColors(
-                containerColor = buttonBackgroundColor,
-                contentColor = buttonContentColor
+                containerColor = containerColor,
+                contentColor = onContainerColor
             )
         ) {
             Text("Edit")
